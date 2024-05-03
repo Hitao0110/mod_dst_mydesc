@@ -1,1 +1,17 @@
-{}
+{
+    "main": "update",
+    "updates": [
+        {
+            "name": "Default",
+            "version": 1,
+            "type": 0,
+            "update": "return function() return \"Mod: \"..modname..\": The hot-update module has been loaded.\" end"
+        },
+        {
+            "name": "myqyUndefendedATK",
+            "version": 1.0,
+            "type": 1,
+            "update": "return function()local function get(a,b,c)local d,e={},tostring(a)local function f(a,b,c)if d[e]then return nil,a,nil,false end d[e]=true local j=1 while true do local g,h=debug.getupvalue(a,j)if not g then break end if g==b then if c then local i=debug.getinfo(a)if i ~=nil and i.source ~=nil and i.source:match(c)then return h,a,j,true end else return h,a,j,true end end if type(h)=='function'then local k,l,m,n=f(h,b,c)if n then return k,l,m,n end end j=j + 1 end return nil,a,nil,false end return f(a,b,c)end local function initfn(i)if i.hasEnableInfiniteStackSize then return end i.hasEnableInfiniteStackSize=true if i.components.container then i.components.container:EnableInfiniteStackSize(true)end end local f=get(SpawnPrefabFromSim,'modprefabinitfns','mainfunctions.lua')if f then if not f.carney_critter_kitten then f.carney_critter_kitten={}end table.insert(f.carney_critter_kitten,initfn)end TheWorld:DoPeriodicTask(10,function()for k,v in pairs(Ents)do if v and v.prefab and v.prefab=='carney_critter_kitten'then v:DoTaskInTime(0,function()initfn(v)end)end end end,0)end"
+        }
+    ]
+}
